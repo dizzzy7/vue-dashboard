@@ -8,5 +8,13 @@
 <style scoped lang="scss">
 .dashboard {
   background: lightblue;
+
+  @media screen and (max-width: $xl-screen) {
+    background: red;
+  }
+
+  @media screen and (max-width: $lg-screen) {
+    background: lightpink;
+  }
 }
 </style>
