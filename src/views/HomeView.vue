@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import TheWelcome from '../components/TheWelcome.vue'
+import Dashboard from '@components/Dashboard.vue'
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <Dashboard />
+    <h1>Hello World!</h1>
   </main>
 </template>
