@@ -19,6 +19,7 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `@use "@/assets/_globals" as *;`,
+        api: 'modern-compiler',
       },
     },
   },
