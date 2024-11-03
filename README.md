@@ -1,6 +1,13 @@
 # vue-dashboard
 
-This template should help get you started developing with Vue 3 in Vite.
+## Notes
+
+Possible Widgets that I could build:
+
+- Currency Graph, display graph that shows some currency in EUR
+- Weather
+- BVG/S-Bahn
+- Open Street Maps
 
 ## Recommended IDE Setup
 
