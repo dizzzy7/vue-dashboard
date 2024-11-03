@@ -70,6 +70,32 @@ h6 {
   isolation: isolate;
 }
 
+// ---------
+
+:root {
+  --main-font-family: 'Arial', sans-serif;
+}
+
+body {
+  font-family: var(--main-font-family);
+  background-color: $background-color;
+}
+
 .text-center {
   text-align: center;
+}
+
+main {
+  color: $text-primary-color;
+  min-height: 100vh;
+}
+
+section {
+  max-width: 1080px;
+  margin: 0 auto;
+  outline: 2em;
+}
+
+.container {
+  padding: 2em;
 }
