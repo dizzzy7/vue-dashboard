@@ -98,4 +98,12 @@ section {
 
 .container {
   padding: 2em;
+
+  @media screen and (max-width: $sm-screen) {
+    padding: 2em 1em;
+  }
+}
+
+h1 {
+  font-size: 2rem;
 }
