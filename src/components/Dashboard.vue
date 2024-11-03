@@ -1,9 +1,13 @@
 <!-- eslint-disable vue/multi-word-component-names -->
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import WeatherWidget from './widgets/WeatherWidget.vue'
+</script>
 
 <template>
   <div class="dashboard">
-    <div class="dashboard__item dashboard__item--span-one">Small item 1</div>
+    <div class="dashboard__item dashboard__item--span-one">
+      <WeatherWidget />
+    </div>
     <div class="dashboard__item dashboard__item--span-one">Small item 2</div>
     <div class="dashboard__item dashboard__item--span-one">Small item 3</div>
     <div class="dashboard__item dashboard__item--span-three">3 Span Item</div>
