@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { getLocation } from '@/api/locationService'
-import { getDailyWeather } from '@/api/weatherService'
+import { getCurrentWeather } from '@/api/weatherService'
 /**
  * The widget displays:
  * weather icon, location, temperature, (the same or mini version for following days)
@@ -16,6 +16,8 @@ import { getDailyWeather } from '@/api/weatherService'
 
 import { useQuery } from '@tanstack/vue-query'
 import { computed } from 'vue'
+
+import WeatherIcon from '../WeatherIcon.vue'
 
 const { isPending: locationIsPending, data: locationData } = useQuery<{
   city: string
@@ -41,7 +43,7 @@ const { isPending: weatherIsPending, data: weatherData } = useQuery({
       location.value.lat &&
       location.value.lon
     ) {
-      return getDailyWeather(location.value.lat, location.value.lon)
+      return getCurrentWeather(location.value.lat, location.value.lon)
     }
   },
   enabled: enabled,
@@ -49,42 +51,34 @@ const { isPending: weatherIsPending, data: weatherData } = useQuery({
 
 const currentHour = new Date().getHours()
 
-console.log(weatherData)
-
-import DefaultIcon from '@/assets/icons/cloudy-day-1.svg?component'
-import AnimatedIcon from '@/assets/icons/animated/rainy-2.svg?component'
 // import DefaultIcon from '@/assets/icons/animated/cloudy-day-2.svg?component'
 </script>
 
 <template>
-  <div class="weather-widget">
-    <div
-      class="weather-widget__icon"
-      :class="{
-        'weather-widget__icon--loading': weatherIsPending.valueOf(),
-      }"
-    >
-      <DefaultIcon width="100" height="100" v-if="weatherIsPending.valueOf()" />
-      <AnimatedIcon
-        width="100"
-        height="100"
-        viewBox="0 0 64 64"
-        v-if="!weatherIsPending.valueOf()"
-      />
-      <!-- dynamically load image from -->
+  <div
+    class="weather-widget"
+    :class="{ 'weather-widget--is-loading': weatherIsPending }"
+  >
+    <div class="weather-widget__icon">
+      <WeatherIcon :isLoading="weatherIsPending" />
     </div>
-    <div>
-      <!-- TODO: use spinner to indicate loading of weather -->
+    <div class="weather-widget__details">
       <div class="weather-widget__location">
-        <span v-if="locationIsPending">...</span>
-        <span v-if="locationData">{{ locationData.city }}</span>
+        <div
+          class="weather-widget__location-placeholder"
+          v-if="weatherIsPending"
+        ></div>
+        <span v-else-if="locationData">{{ locationData.city }}</span>
       </div>
       <div class="weather-widget__temperature">
-        <span v-if="weatherIsPending">...</span>
+        <div
+          class="weather-widget__temperature-placeholder"
+          v-if="weatherIsPending"
+        ></div>
         <div v-if="weatherData">
           <div>
-            {{ weatherData.hourly.temperature_2m[currentHour] }}
-            {{ weatherData.hourly_units.temperature_2m }}
+            {{ weatherData.current.temperature_2m }}
+            {{ weatherData.current_units.temperature_2m }}
           </div>
         </div>
       </div>
@@ -96,6 +90,11 @@ import AnimatedIcon from '@/assets/icons/animated/rainy-2.svg?component'
 .weather-widget {
   display: flex;
   align-items: center;
+  transition: opacity 1s;
+
+  &--is-loading {
+    opacity: 0;
+  }
 
   &__icon {
     transition:
@@ -105,6 +104,24 @@ import AnimatedIcon from '@/assets/icons/animated/rainy-2.svg?component'
       opacity: 0.8;
       filter: grayscale(0.8);
     }
+  }
+
+  &__location-placeholder {
+    background: var(--background-color);
+    width: 160px;
+    height: 10px;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    border-radius: 1em;
+    margin-bottom: 0.5em;
+  }
+
+  &__temperature-placeholder {
+    background: $placeholder-color;
+    width: 50px;
+    height: 10px;
+    display: inline-block;
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    border-radius: 1em;
   }
 
   @media screen and (max-width: $xl-screen) {

@@ -1,21 +1,13 @@
-<!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
-import WeatherWidget from './widgets/WeatherWidget.vue'
+import DashboardNavigation from '../DashboardNavigation.vue'
 </script>
 
 <template>
   <div class="dashboard">
-    <nav class="dashboard__navigation">
-      <ul class="dashboard__navigation-list">
-        <li class="dashboard__navigation-list-item">Weather</li>
-        <li class="dashboard__navigation-list-item">Currency Graph</li>
-        <li class="dashboard__navigation-list-item">BVG/S-Bahn</li>
-        <li class="dashboard__navigation-list-item">Open Street Maps</li>
-      </ul>
-    </nav>
+    <DashboardNavigation active-item="Currency Graph" />
     <section class="dashboard__body">
       <div class="dashboard__body-item dashboard__item--span-one">
-        <WeatherWidget />
+        THIS IS THE CURRENCY DASHBOARD
       </div>
     </section>
   </div>
@@ -42,29 +34,6 @@ import WeatherWidget from './widgets/WeatherWidget.vue'
   }
 
   @media screen and (max-width: $sm-screen) {
-  }
-
-  &__navigation {
-    background-color: #58546d;
-    border-radius: 1em;
-    padding: 1em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  &__navigation-list {
-    padding-left: 0;
-  }
-
-  &__navigation-list-item {
-    list-style-type: none;
-    padding: 0.5em 0;
-    border-bottom: 1px solid #fff8;
-
-    &:last-child {
-      border-bottom: 0;
-    }
   }
 
   &__body {
