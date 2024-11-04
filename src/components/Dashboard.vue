@@ -5,26 +5,31 @@ import WeatherWidget from './widgets/WeatherWidget.vue'
 
 <template>
   <div class="dashboard">
-    <div class="dashboard__item dashboard__item--span-one">
-      <WeatherWidget />
-    </div>
-    <div class="dashboard__item dashboard__item--span-one">Small item 2</div>
-    <div class="dashboard__item dashboard__item--span-one">Small item 3</div>
-    <div class="dashboard__item dashboard__item--span-three">3 Span Item</div>
-    <div class="dashboard__item dashboard__item--span-two">2 Span Item</div>
+    <nav class="dashboard__navigation">
+      <ul class="dashboard__navigation-list">
+        <li class="dashboard__navigation-list-item">Weather</li>
+        <li class="dashboard__navigation-list-item">Currency Graph</li>
+        <li class="dashboard__navigation-list-item">BVG/S-Bahn</li>
+        <li class="dashboard__navigation-list-item">Open Street Maps</li>
+      </ul>
+    </nav>
+    <section class="dashboard__body">
+      <div class="dashboard__body-item dashboard__item--span-one">
+        <WeatherWidget />
+      </div>
+    </section>
   </div>
 </template>
 
 <style scoped lang="scss">
 .dashboard {
-  background: #58546d;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
   padding: 1em;
-  gap: 0.5em;
   grid-auto-flow: row;
   justify-content: center;
   border-radius: 1em;
+  display: grid;
+  gap: 1em;
+  grid-template-columns: 200px 1fr;
 
   @media screen and (max-width: $xl-screen) {
   }
@@ -39,9 +44,44 @@ import WeatherWidget from './widgets/WeatherWidget.vue'
   @media screen and (max-width: $sm-screen) {
   }
 
-  &__item {
+  &__navigation {
+    background-color: #58546d;
+    border-radius: 1em;
+    padding: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__navigation-list {
+    padding-left: 0;
+  }
+
+  &__navigation-list-item {
+    list-style-type: none;
+    padding: 0.5em 0;
+    border-bottom: 1px solid #fff8;
+
+    &:last-child {
+      border-bottom: 0;
+    }
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0, auto));
+    padding: 1em;
+    gap: 0.5em;
+    grid-auto-flow: row;
+    justify-content: center;
+    border-radius: 1em;
+    background: #58546d;
+    width: 100%;
+  }
+
+  &__body-item {
     border-radius: 0.7em;
-    background-color: #7e77a1;
+    background-color: #8680a5;
     padding: 0.5em 1em;
     min-height: 4em;
     display: flex;
