@@ -1,5 +1,10 @@
 # vue-dashboard
 
+## Libraries
+
+- chart.js
+- pinia (state management library)
+
 ## Notes
 
 Possible Dashboards that I could build:
