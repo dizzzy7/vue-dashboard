@@ -73,13 +73,16 @@ h6 {
 // ---------
 
 :root {
-  --main-font-family: 'Arial', sans-serif;
+  --main-font-family: #{$main-font-family};
+  --background-color: #{$background-color};
+  --text-primary-color: #{$text-primary-color};
+  --placeholder-color: #{$placeholder-color};
 }
 
 body {
   font-family: var(--main-font-family);
-  background-color: $background-color;
-  color: $text-primary-color;
+  background-color: var(--background-color);
+  color: var(--text-primary-color);
 }
 
 .text-center {
@@ -98,9 +101,15 @@ section {
 
 .container {
   padding: 2em;
+  transition: opacity 0.2s;
+  opacity: 0;
 
   @media screen and (max-width: $sm-screen) {
     padding: 2em 1em;
+  }
+
+  &--is-loaded {
+    opacity: 1;
   }
 }
 
@@ -110,4 +119,14 @@ h1 {
 
 ul {
   padding-left: 2em;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }
