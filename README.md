@@ -2,12 +2,25 @@
 
 ## Notes
 
-Possible Widgets that I could build:
+Possible Dashboards that I could build:
 
 - Currency Graph, display graph that shows some currency in EUR
 - Weather
 - BVG/S-Bahn
 - Open Street Maps
+
+TODO:
+add https://vue-chartjs.org/ for graphs
+
+### Weather
+
+- Show current temps,
+- Show weather charts
+
+  - Show rain probabilities for the day, (blue column chart)
+  - Show the temps for the day (line graph)
+
+- Show temps of following days
 
 ## Recommended IDE Setup
 
