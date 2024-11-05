@@ -5,22 +5,25 @@ import navigatableRoutes from '@/router/routes'
 <template>
   <nav class="dashboard__navigation">
     <ul class="dashboard__navigation-list">
-      <li
-        v-for="navigatableRoute of navigatableRoutes"
-        class="dashboard__navigation-list-item"
-      >
+      <li v-for="navigatableRoute of navigatableRoutes">
         <RouterLink
           active-class="dashboard__navigation-list-item--active"
+          class="dashboard__navigation-list-item"
           :to="navigatableRoute.path"
-          >{{ navigatableRoute.name }}</RouterLink
         >
+          {{ navigatableRoute.name }}
+        </RouterLink>
       </li>
     </ul>
   </nav>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .dashboard {
+  ul {
+    list-style-type: none;
+  }
+
   &__navigation {
     background-color: #58546d;
     border-radius: 1em;
@@ -39,7 +42,17 @@ import navigatableRoutes from '@/router/routes'
     padding: 0.5em 0;
     border-bottom: 1px solid #fff8;
     opacity: 0.8;
-    transition: opacity 0.5s;
+    transition:
+      opacity 0.5s,
+      text-decoration-color 0.2s;
+    color: var(--text-primary-color);
+    text-decoration-color: #fff0;
+    text-underline-offset: 3px;
+
+    &--active {
+      opacity: 1;
+      text-decoration-color: #fff;
+    }
 
     &:hover {
       opacity: 1;
