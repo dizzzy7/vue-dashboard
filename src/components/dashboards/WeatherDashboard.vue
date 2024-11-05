@@ -2,6 +2,25 @@
 <script setup lang="ts">
 import WeatherWidget from '@/components/widgets/CurrentWeatherWidget.vue'
 import DashboardNavigation from '../DashboardNavigation.vue'
+import { useLocation } from '@/api/locationService'
+import { computed } from 'vue'
+import { useQuery } from '@tanstack/vue-query'
+import { useWeather } from '@/api/weatherService'
+
+const { isPending: locationIsPending, data: locationData } = useLocation()
+
+const location = computed(() => ({
+  lat: locationData.value?.lat,
+  lon: locationData.value?.lon,
+}))
+
+const enabled = computed(() => !!locationData.value)
+
+const { isPending: currentWeatherIsPending, data: currentWeatherData } =
+  useWeather(location, enabled, 'current')
+
+const { isPending: hourlyWeatherIsPending, data: hourlyWeatherData } =
+  useWeather(location, enabled, 'hourly')
 </script>
 
 <template>
@@ -9,7 +28,12 @@ import DashboardNavigation from '../DashboardNavigation.vue'
     <DashboardNavigation active-item="Weather" />
     <section class="dashboard__body">
       <div class="dashboard__body-item dashboard__item--span-one">
-        <WeatherWidget />
+        <WeatherWidget
+          v-if="locationData"
+          :location-data="locationData"
+          :weather-data="currentWeatherData"
+          :weather-is-pending="currentWeatherIsPending"
+        />
       </div>
     </section>
   </div>

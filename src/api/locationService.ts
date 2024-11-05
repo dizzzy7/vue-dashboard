@@ -1,9 +1,19 @@
-export const getLocation = async () => {
-  const response = await fetch('http://ip-api.com/json/')
+import { useQuery } from '@tanstack/vue-query'
 
-  if (!response.ok) {
-    throw new Error(response.statusText)
-  }
+export const useLocation = () =>
+  useQuery<{
+    city: string
+    lat: number
+    lon: number
+  }>({
+    queryKey: ['location', 'estimated'],
+    queryFn: async () => {
+      const response = await fetch('http://ip-api.com/json/')
 
-  return response.json()
-}
+      if (!response.ok) {
+        throw new Error(response.statusText)
+      }
+
+      return response.json()
+    },
+  })

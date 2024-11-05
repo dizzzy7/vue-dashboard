@@ -1,57 +1,31 @@
 <script setup lang="ts">
-import { getLocation } from '@/api/locationService'
-import { getCurrentWeather } from '@/api/weatherService'
 /**
  * The widget displays:
  * weather icon, location, temperature, (the same or mini version for following days)
  * (the ability to select and change the location might get added later)
  * get estimated location from user through IP Geolocation API
  * http://ip-api.com/json/{query}
-
-
  *
  * icons used:
  * https://www.amcharts.com/free-animated-svg-weather-icons/
  */
 
-import { useQuery } from '@tanstack/vue-query'
-import { computed } from 'vue'
-
 import WeatherIcon from '../WeatherIcon.vue'
 
-const { isPending: locationIsPending, data: locationData } = useQuery<{
-  city: string
-  lat: number
-  lon: number
-}>({
-  queryKey: ['location', 'estimated'],
-  queryFn: getLocation,
-})
-
-const location = computed(() => ({
-  lat: locationData.value?.lat,
-  lon: locationData.value?.lon,
-}))
-
-const enabled = computed(() => !!locationData.value)
-
-const { isPending: weatherIsPending, data: weatherData } = useQuery({
-  queryKey: ['weather'],
-  queryFn: () => {
-    if (
-      location.value !== undefined &&
-      location.value.lat &&
-      location.value.lon
-    ) {
-      return getCurrentWeather(location.value.lat, location.value.lon)
+type WeatherWidgetProps = {
+  weatherIsPending: boolean
+  locationData: { city: string }
+  weatherData: {
+    current: {
+      temperature_2m: string
     }
-  },
-  enabled: enabled,
-})
+    current_units: {
+      temperature_2m: string
+    }
+  }
+}
 
-const currentHour = new Date().getHours()
-
-// import DefaultIcon from '@/assets/icons/animated/cloudy-day-2.svg?component'
+defineProps<WeatherWidgetProps>()
 </script>
 
 <template>
