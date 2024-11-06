@@ -67,6 +67,9 @@ defineProps<WeatherWidgetProps>()
               grid: {
                 display: false,
               },
+              border: {
+                color: 'transparent',
+              },
               ticks: {
                 color: '#fffc',
                 callback: (value, index, ticks) => {
@@ -84,7 +87,7 @@ defineProps<WeatherWidgetProps>()
                 color: '#fffa',
                 display: false,
               },
-              max: 100,
+              max: 130,
             },
           },
         }"
