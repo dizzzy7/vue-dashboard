@@ -4,44 +4,58 @@ import navigatableRoutes from '@/router/routes'
 
 <template>
   <nav class="dashboard__navigation">
-    <ul class="dashboard__navigation-list">
-      <li v-for="navigatableRoute of navigatableRoutes">
-        <RouterLink
-          active-class="dashboard__navigation-list-item--active"
-          class="dashboard__navigation-list-item"
-          :to="navigatableRoute.path"
-        >
-          {{ navigatableRoute.name }}
-        </RouterLink>
-      </li>
-    </ul>
+    <div class="dashboard__navigation-inner-container">
+      <ul class="dashboard__navigation-list">
+        <li v-for="(navigatableRoute, index) of navigatableRoutes" :key="index">
+          <RouterLink
+            active-class="dashboard__navigation-list-item--active"
+            class="dashboard__navigation-list-item"
+            :to="navigatableRoute.path"
+          >
+            {{ navigatableRoute.name }}
+          </RouterLink>
+        </li>
+      </ul>
+    </div>
   </nav>
 </template>
 
 <style scoped lang="scss">
 .dashboard {
-  ul {
-    list-style-type: none;
+  &__navigation-inner-container {
+    position: fixed;
+    background-color: $background-primary-color;
+    top: 116px;
+    width: 190px;
+    height: 330px;
+    border-radius: 1em;
+    padding: 1em;
   }
-
   &__navigation {
-    background-color: #58546d;
+    position: relative;
     border-radius: 1em;
     padding: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media screen and (max-width: $md-screen) {
+      display: none;
+    }
   }
 
   &__navigation-list {
     padding-left: 0;
+    list-style-type: none;
   }
 
   &__navigation-list-item {
+    display: block;
     list-style-type: none;
     padding: 0.5em 0;
     border-bottom: 1px solid #fff8;
     opacity: 0.8;
+    width: 100%;
     transition:
       opacity 0.5s,
       text-decoration-color 0.2s;

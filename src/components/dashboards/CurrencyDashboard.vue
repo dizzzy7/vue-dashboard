@@ -44,13 +44,13 @@ import DashboardNavigation from '../DashboardNavigation.vue'
     grid-auto-flow: row;
     justify-content: center;
     border-radius: 1em;
-    background: #58546d;
+    background: $background-primary-color;
     width: 100%;
   }
 
   &__body-item {
     border-radius: 0.7em;
-    background-color: #8680a5;
+    background-color: $background-secondary-color;
     padding: 0.5em 1em;
     min-height: 4em;
     display: flex;
