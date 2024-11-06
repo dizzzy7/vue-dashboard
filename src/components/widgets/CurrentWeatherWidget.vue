@@ -1,15 +1,13 @@
 <script setup lang="ts">
 /**
  * The widget displays:
- * weather icon, location, temperature, (the same or mini version for following days)
- * (the ability to select and change the location might get added later)
- * get estimated location from user through IP Geolocation API
- * http://ip-api.com/json/{query}
+ * weather icon, location, temperature
  *
  * icons used:
  * https://www.amcharts.com/free-animated-svg-weather-icons/
  */
 
+import { ref, watch } from 'vue'
 import WeatherIcon from '../WeatherIcon.vue'
 
 type WeatherWidgetProps = {
@@ -24,6 +22,18 @@ type WeatherWidgetProps = {
     }
   }
 }
+
+const date = ref(new Date())
+
+watch(
+  date,
+  () => {
+    setTimeout(() => {
+      date.value = new Date()
+    }, 1000)
+  },
+  { immediate: true },
+)
 
 defineProps<WeatherWidgetProps>()
 </script>
@@ -57,6 +67,14 @@ defineProps<WeatherWidgetProps>()
         </div>
       </div>
     </div>
+    <div class="weather-widget__extra">
+      <span class="weather-widget_-extra-date">{{
+        date.toLocaleDateString()
+      }}</span>
+      <span class="weather-widget__extra-time">{{
+        date.toLocaleTimeString()
+      }}</span>
+    </div>
   </div>
 </template>
 
@@ -65,6 +83,7 @@ defineProps<WeatherWidgetProps>()
   display: flex;
   align-items: center;
   transition: opacity 1s;
+  width: 100%;
 
   &--is-loading {
     opacity: 0;
@@ -78,6 +97,24 @@ defineProps<WeatherWidgetProps>()
       opacity: 0.8;
       filter: grayscale(0.8);
     }
+  }
+
+  &__extra {
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+  }
+
+  &__extra-time {
+    font-size: 2rem;
+
+    @media screen and (max-width: $md-screen) {
+      font-size: 1.5rem;
+    }
+  }
+
+  &__extra-date {
   }
 
   &__location-placeholder {
