@@ -25,11 +25,10 @@ import navigatableRoutes from '@/router/routes'
   &__navigation-inner-container {
     position: fixed;
     background-color: $background-primary-color;
-    top: 116px;
+    top: 48px;
     width: 190px;
-    height: 330px;
     border-radius: 1em;
-    padding: 1em;
+    padding: 0.5em;
   }
   &__navigation {
     position: relative;
@@ -62,6 +61,9 @@ import navigatableRoutes from '@/router/routes'
     color: var(--text-primary-color);
     text-decoration-color: #fff0;
     text-underline-offset: 3px;
+    transition: background-color 0.2s;
+    border-radius: 0.5em;
+    padding: 0.5em 0.75em;
 
     &--active {
       opacity: 1;
@@ -70,6 +72,7 @@ import navigatableRoutes from '@/router/routes'
 
     &:hover {
       opacity: 1;
+      background-color: $background-secondary-color;
     }
 
     &--active {
