@@ -14,7 +14,6 @@ onMounted(() => {
   <main>
     <div class="container" :class="{ 'container--is-loaded': isLoaded }">
       <section>
-        <h1 class="text-center">Welcome</h1>
         <RouterView />
       </section>
     </div>
