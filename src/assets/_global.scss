@@ -18,6 +18,10 @@ body {
   line-height: 1.5;
   /* 4. Improve text rendering */
   -webkit-font-smoothing: antialiased;
+
+  @media screen and (max-width: $sm-screen) {
+    font-size: calc(1vw - -12px);
+  }
 }
 
 /* 5. Improve media defaults */
