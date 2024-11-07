@@ -7,7 +7,6 @@
  * https://www.amcharts.com/free-animated-svg-weather-icons/
  */
 
-import { ref, watch } from 'vue'
 import WeatherIcon from '../WeatherIcon.vue'
 
 type WeatherWidgetProps = {
@@ -26,18 +25,6 @@ type WeatherWidgetProps = {
   }
 }
 
-const date = ref(new Date())
-
-watch(
-  date,
-  () => {
-    setTimeout(() => {
-      date.value = new Date()
-    }, 1000)
-  },
-  { immediate: true },
-)
-
 defineProps<WeatherWidgetProps>()
 </script>
 
@@ -52,7 +39,6 @@ defineProps<WeatherWidgetProps>()
         :precipitationProbability="
           weatherData.current.precipitation_probability
         "
-        :time="date"
         :isDay="weatherData.current.is_day"
         :weatherCode="weatherData.current.weather_code"
       />
@@ -80,14 +66,6 @@ defineProps<WeatherWidgetProps>()
         </div>
       </div>
     </div>
-    <div class="weather-widget__extra">
-      <span class="weather-widget_-extra-date">{{
-        date.toLocaleDateString()
-      }}</span>
-      <span class="weather-widget__extra-time">{{
-        date.toLocaleTimeString()
-      }}</span>
-    </div>
   </div>
 </template>
 
@@ -112,27 +90,18 @@ defineProps<WeatherWidgetProps>()
     }
   }
 
-  &__extra {
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: end;
-  }
-
-  &__extra-time {
-    font-size: 2rem;
-
-    @media screen and (max-width: $md-screen) {
-      font-size: 1.5rem;
-    }
-  }
-
-  &__extra-date {
-  }
-
   &__location {
     font-size: 1rem;
     margin-bottom: -1px;
+    line-height: 1.4rem;
+
+    @media screen and (max-width: $md-screen) {
+      font-size: 1rem;
+    }
+
+    @media screen and (max-width: $sm-screen) {
+      font-size: 0.9rem;
+    }
   }
 
   &__location-placeholder {
@@ -146,6 +115,10 @@ defineProps<WeatherWidgetProps>()
 
   &__temperature {
     font-size: 1.75rem;
+
+    @media screen and (max-width: $sm-screen) {
+      font-size: 1.5rem;
+    }
   }
 
   &__temperature-placeholder {

@@ -37,47 +37,49 @@ const dimensions = {
 </script>
 
 <template>
-  <div v-if="isLoading" class="weather-icon__placeholder">
-    <div class="weather-icon__placeholder-image">
-      <DefaultIcon width="100" height="100" viewBox="0 0 64 64" />
+  <div class="weather-icon">
+    <div v-if="isLoading" class="weather-icon__placeholder">
+      <div class="weather-icon__placeholder-image">
+        <DefaultIcon width="100" height="100" viewBox="0 0 64 64" />
+      </div>
     </div>
-  </div>
-  <div v-else-if="isDay !== 0">
-    <SnowyAnimation
-      v-if="isSnowing.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
-    <RainAnimation
-      v-else-if="isRaining.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
-    <DayAnimation
-      v-else-if="skyVisible.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
-    <CloudyDayAnimation
-      v-else-if="skyInvisible.indexOf(weatherCode)"
-      v-bind="dimensions"
-    />
-  </div>
-  <div v-else-if="isDay === 0" class="weather-icon__night-time">
-    <NightIcon
-      v-if="skyVisible.indexOf(weatherCode) !== -1"
-      class="weather-icon__night-time-icon"
-      v-bind="dimensions"
-    />
-    <SnowyAnimation
-      v-if="isSnowing.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
-    <RainAnimation
-      v-else-if="isRaining.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
-    <CloudyNightAnimation
-      v-else-if="skyInvisible.indexOf(weatherCode) !== -1"
-      v-bind="dimensions"
-    />
+    <div v-else-if="isDay !== 0">
+      <SnowyAnimation
+        v-if="isSnowing.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+      <RainAnimation
+        v-else-if="isRaining.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+      <DayAnimation
+        v-else-if="skyVisible.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+      <CloudyDayAnimation
+        v-else-if="skyInvisible.indexOf(weatherCode)"
+        v-bind="dimensions"
+      />
+    </div>
+    <div v-else-if="isDay === 0" class="weather-icon__night-time">
+      <NightIcon
+        v-if="skyVisible.indexOf(weatherCode) !== -1"
+        class="weather-icon__night-time-icon"
+        v-bind="dimensions"
+      />
+      <SnowyAnimation
+        v-if="isSnowing.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+      <RainAnimation
+        v-else-if="isRaining.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+      <CloudyNightAnimation
+        v-else-if="skyInvisible.indexOf(weatherCode) !== -1"
+        v-bind="dimensions"
+      />
+    </div>
   </div>
 </template>
 
@@ -85,6 +87,10 @@ const dimensions = {
 .weather-icon {
   &__placeholder {
     display: flex;
+  }
+
+  svg {
+    height: 100%;
   }
 
   &__placeholder-image {
@@ -101,6 +107,12 @@ const dimensions = {
     position: relative;
     width: 100px;
     height: 100px;
+
+    @media screen and (max-width: $sm-screen) {
+      width: 70px;
+      height: 70px;
+      margin-right: 0.5em;
+    }
   }
 
   &__night-time-icon {

@@ -18,6 +18,7 @@ import {
 } from 'chart.js'
 
 import ChartDataLabels from 'chartjs-plugin-datalabels'
+import { computed } from 'vue'
 
 ChartJS.register(
   Title,
@@ -43,7 +44,20 @@ type WeatherWidgetProps = {
   viewport: number[]
 }
 
-defineProps<WeatherWidgetProps>()
+const props = defineProps<WeatherWidgetProps>()
+
+const aspectRatio = computed(() => {
+  let result
+  if (props.viewport[0] < 425) {
+    result = 2
+  } else if (props.viewport[0] < 768) {
+    result = 3
+  } else {
+    result = 4
+  }
+
+  return result
+})
 </script>
 
 <template>
@@ -58,7 +72,7 @@ defineProps<WeatherWidgetProps>()
         :options="{
           responsive: true,
           color: '#aabbcc',
-          aspectRatio: viewport[0] < 500 ? 2 : 4,
+          aspectRatio: aspectRatio,
           borderColor: '#ffa3c6',
           scales: {
             x: {
@@ -166,6 +180,7 @@ defineProps<WeatherWidgetProps>()
   }
 
   @media screen and (max-width: $md-screen) {
+    aspect-ratio: 3/1;
   }
 
   @media screen and (max-width: $sm-screen) {

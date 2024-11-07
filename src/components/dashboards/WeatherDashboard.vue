@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <script setup lang="ts">
 import CurrentWeatherWidget from '@/components/widgets/CurrentWeatherWidget.vue'
+import CurrentTimeWidget from '@/components/widgets/CurrentTimeWidget.vue'
 import DashboardNavigation from '../DashboardNavigation.vue'
 import { useLocation } from '@/api/locationService'
 import { computed, ref } from 'vue'
@@ -35,13 +36,16 @@ const { width, height } = useWindowSize()
   <div class="dashboard">
     <DashboardNavigation active-item="Weather" />
     <section class="dashboard__body">
-      <div class="dashboard__body-item dashboard__body-item--span-two">
+      <div class="dashboard__body-item dashboard__body-item--span-one">
         <CurrentWeatherWidget
           v-if="!currentWeatherIsPending && locationData"
           :location-data="locationData"
           :weather-data="currentWeatherData"
           :weather-is-pending="currentWeatherIsPending"
         />
+      </div>
+      <div class="dashboard__body-item dashboard__body-item--span-one">
+        <CurrentTimeWidget />
       </div>
       <div class="dashboard__body-item dashboard__body-item--span-two">
         <div class="dashboard__tabs">
@@ -128,7 +132,7 @@ const { width, height } = useWindowSize()
 
   &__body {
     display: grid;
-    grid-template-columns: minmax(0, auto) minmax(300px, 1fr);
+    grid-template-columns: minmax(200px, 2fr) minmax(180px, 1fr);
     padding: 1em;
     gap: 0.8em;
     grid-auto-flow: row;
@@ -137,13 +141,25 @@ const { width, height } = useWindowSize()
     background: $background-primary-color;
     width: 100%;
 
+    @media screen and (max-width: $lg-screen) {
+      grid-template-columns: minmax(250px, 2fr) minmax(160px, 1fr);
+    }
+
     @media screen and (max-width: $md-screen) {
-      grid-template-columns: minmax(288px, 1fr);
+      grid-template-columns: minmax(288px, 2fr);
+      background-color: transparent;
     }
 
     @media screen and (max-width: $sm-screen) {
+      grid-template-columns: minmax(0, 2fr) minmax(100px, 1fr);
       padding: 0;
-      background: transparent;
+      background: linear-gradient(
+        90deg,
+        $background-primary-color--fade-out,
+        $background-primary-color,
+        $background-primary-color--fade-out
+      );
+      border-radius: 0;
     }
   }
 
@@ -174,14 +190,10 @@ const { width, height } = useWindowSize()
     }
 
     @media screen and (max-width: $sm-screen) {
-      background: linear-gradient(
-        90deg,
-        $background-primary-color--fade-out,
-        $background-primary-color,
-        $background-primary-color--fade-out
-      );
       border-radius: 0em;
       padding: 1em;
+      outline: 13px solid $background-color;
+      background-color: transparent;
     }
   }
 }
