@@ -91,12 +91,12 @@ const isLoading = computed(() => results.value.some(query => query.isLoading))
   background: $background-primary-color;
   border-radius: 1em;
   margin: 1em;
-  display: hidden;
+  display: none;
+  box-shadow: 0px 0px 13px 0px $background-color;
 
   @media screen and (max-width: $md-screen) {
-    // display: block;
+    display: flex;
   }
-  box-shadow: 0px 0px 13px 0px $background-color;
 }
 .currency-dashboard__body {
   .dashboard__body-item {
