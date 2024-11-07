@@ -16,7 +16,7 @@ defineProps<{ navigationHidden: boolean }>()
           <RouterLink
             active-class="dashboard__navigation-list-item--active"
             class="dashboard__navigation-list-item"
-            :to="navigationHidden ? navigatableRoute.path : ''"
+            :to="navigatableRoute.path"
           >
             {{ navigatableRoute.name }}
           </RouterLink>
@@ -51,8 +51,8 @@ defineProps<{ navigationHidden: boolean }>()
     }
 
     &--hidden {
-      pointer-events: none;
       @media screen and (max-width: $md-screen) {
+        pointer-events: none;
         transform: translateX(5%);
         opacity: 0;
       }
