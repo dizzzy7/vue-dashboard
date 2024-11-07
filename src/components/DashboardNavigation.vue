@@ -1,16 +1,22 @@
 <script setup lang="ts">
 import navigatableRoutes from '@/router/routes'
+defineProps<{ navigationHidden: boolean }>()
 </script>
 
 <template>
   <nav class="dashboard__navigation">
-    <div class="dashboard__navigation-inner-container">
+    <div
+      class="dashboard__navigation-inner-container"
+      :class="{
+        'dashboard__navigation-inner-container--hidden': !navigationHidden,
+      }"
+    >
       <ul class="dashboard__navigation-list">
         <li v-for="(navigatableRoute, index) of navigatableRoutes" :key="index">
           <RouterLink
             active-class="dashboard__navigation-list-item--active"
             class="dashboard__navigation-list-item"
-            :to="navigatableRoute.path"
+            :to="navigationHidden ? navigatableRoute.path : ''"
           >
             {{ navigatableRoute.name }}
           </RouterLink>
@@ -29,6 +35,28 @@ import navigatableRoutes from '@/router/routes'
     width: 190px;
     border-radius: 1em;
     padding: 0.5em;
+    z-index: 10;
+    transition:
+      transform 0.2s,
+      opacity 0.2s;
+    opacity: 1;
+
+    @media screen and (max-width: $md-screen) {
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: calc(100% - 125px);
+      width: 100%;
+      border-radius: 0;
+    }
+
+    &--hidden {
+      pointer-events: none;
+      @media screen and (max-width: $md-screen) {
+        transform: translateX(5%);
+        opacity: 0;
+      }
+    }
   }
   &__navigation {
     position: relative;
@@ -39,7 +67,7 @@ import navigatableRoutes from '@/router/routes'
     align-items: center;
 
     @media screen and (max-width: $md-screen) {
-      display: none;
+      padding: 0em;
     }
   }
 
