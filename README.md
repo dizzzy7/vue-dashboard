@@ -1,9 +1,63 @@
 # vue-dashboard
 
+## Setup
+
+To build the project you can use your favorite package manager.
+I have been using bun. I tried npm and it works as well.
+
+## Project Setup
+
+```sh
+bun install
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+bun dev
+npm run dev
+```
+
+### Type-Check, Compile and Minify for Production
+
+```sh
+bun build
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+bun lint
+```
+
+## APIs used
+
+I have used the the following APIs:
+
+Location:
+http://ip-api.com/json/
+
+Weather:
+http://api.open-meteo.com/v1/forecast?latitude=${location.value.lat}&longitude=${location.value.lon}&forecast_days=${forecastDays}&timezone=${timeZone}&${interval}=precipitation_probability,temperature_2m,weather_code,is_day
+
+Currency:
+https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/eur.json
+
+Look into the service files (/src/api/.\*Service.ts) to see the api usage and how i fetch the data.
+
 ## Libraries
 
-- chart.js
-- pinia (state management library)
+- "@tanstack/vue-query": "^5.59.17",
+- "@vueuse/core": "^11.2.0",
+- "chart.js": "^4.4.6",
+- "chartjs-plugin-datalabels": "^2.2.0",
+- "date-fns": "^4.1.0",
+- "pinia": "^2.2.6",
+- "vue": "^3.5.12",
+- "vue-chartjs": "^5.3.2",
+- "vue-router": "^4.4.5"
 
 ## Notes
 
@@ -13,9 +67,6 @@ Possible Dashboards that I could build:
 - Weather
 - BVG/S-Bahn
 - Open Street Maps
-
-TODO:
-add https://vue-chartjs.org/ for graphs
 
 ### Weather
 
@@ -41,27 +92,3 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
-bun install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-bun dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-bun build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-bun lint
-```
