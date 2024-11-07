@@ -27,6 +27,9 @@ add https://vue-chartjs.org/ for graphs
 
 - Show temps of following days
 
+Weather Codes to display different weather states can be found here:
+https://www.nodc.noaa.gov/archive/arc0021/0002199/1.1/data/0-data/HTML/WMO-CODE/WMO4677.HTM
+
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
