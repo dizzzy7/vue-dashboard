@@ -1,0 +1,137 @@
+// CSS RESET
+// source: https://www.joshwcomeau.com/css/custom-css-reset/
+
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+
+  @media screen and (max-width: $sm-screen) {
+    font-size: calc(1vw - -12px);
+  }
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/*
+  9. Create a root stacking context
+*/
+#root,
+#__next {
+  isolation: isolate;
+}
+
+// ---------
+
+:root {
+  --main-font-family: #{$main-font-family};
+  --background-color: #{$background-color};
+  --text-primary-color: #{$text-primary-color};
+  --placeholder-color: #{$placeholder-color};
+}
+
+body {
+  font-family: var(--main-font-family);
+  background-color: var(--background-color);
+  color: var(--text-primary-color);
+}
+
+.text-center {
+  text-align: center;
+}
+
+main {
+  min-height: 100vh;
+}
+
+section {
+  max-width: 1080px;
+  margin: 0 auto;
+  outline: 2em;
+}
+
+.container {
+  padding: 2em;
+  transition: opacity 0.2s;
+  opacity: 0;
+  overflow-x: hidden;
+
+  @media screen and (max-width: $md-screen) {
+    padding: 6em 0em 2em 0em;
+  }
+
+  &--is-loaded {
+    opacity: 1;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+ul {
+  padding-left: 2em;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
