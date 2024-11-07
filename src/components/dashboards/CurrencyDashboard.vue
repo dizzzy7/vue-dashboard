@@ -16,8 +16,6 @@ const selectedCurrency = ref<string>('jpy')
 const navigationHidden = ref(false)
 
 const isLoading = computed(() => results.value.some(query => query.isLoading))
-// const isError = computed(() => results.value.some(query => query.isError))
-// const data = computed(() => results.value.map(query => query.data))
 </script>
 
 <template>
