@@ -35,11 +35,12 @@ defineEmits<(e: 'update:modelValue', newValue: string) => void>()
 </template>
 <style lang="scss">
 .currency-selector-widget {
+  display: flex;
+  flex-direction: column;
+
   &__select {
     padding: 0.5em;
   }
-  display: flex;
-  flex-direction: column;
   &__currency-details {
     margin-top: 0.9em;
   }
