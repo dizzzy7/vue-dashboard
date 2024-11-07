@@ -16,6 +16,9 @@ type WeatherWidgetProps = {
   weatherData: {
     current: {
       temperature_2m: string
+      precipitation_probability: number
+      is_day: number
+      weather_code: number
     }
     current_units: {
       temperature_2m: string
@@ -44,7 +47,15 @@ defineProps<WeatherWidgetProps>()
     :class="{ 'weather-widget--is-loading': weatherIsPending }"
   >
     <div class="weather-widget__icon">
-      <WeatherIcon :isLoading="weatherIsPending" />
+      <WeatherIcon
+        :isLoading="weatherIsPending"
+        :precipitationProbability="
+          weatherData.current.precipitation_probability
+        "
+        :time="date"
+        :isDay="weatherData.current.is_day"
+        :weatherCode="weatherData.current.weather_code"
+      />
     </div>
     <div class="weather-widget__details">
       <div class="weather-widget__location">
@@ -61,7 +72,9 @@ defineProps<WeatherWidgetProps>()
         ></div>
         <div v-if="weatherData">
           <div>
-            {{ weatherData.current.temperature_2m }}
+            {{
+              Math.round(Number(weatherData.current.temperature_2m)).toString()
+            }}
             {{ weatherData.current_units.temperature_2m }}
           </div>
         </div>
@@ -117,6 +130,11 @@ defineProps<WeatherWidgetProps>()
   &__extra-date {
   }
 
+  &__location {
+    font-size: 1rem;
+    margin-bottom: -1px;
+  }
+
   &__location-placeholder {
     background: var(--background-color);
     width: 160px;
@@ -124,6 +142,10 @@ defineProps<WeatherWidgetProps>()
     animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     border-radius: 1em;
     margin-bottom: 0.5em;
+  }
+
+  &__temperature {
+    font-size: 1.75rem;
   }
 
   &__temperature-placeholder {
