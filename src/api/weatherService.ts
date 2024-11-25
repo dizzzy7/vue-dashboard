@@ -13,7 +13,7 @@ export const useWeather = (
       const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
 
       const response = await fetch(
-        `http://api.open-meteo.com/v1/forecast?latitude=${location.value.lat}&longitude=${location.value.lon}&forecast_days=${forecastDays}&timezone=${timeZone}&${interval}=precipitation_probability,temperature_2m,weather_code,is_day`,
+        `https://api.open-meteo.com/v1/forecast?latitude=${location.value.lat}&longitude=${location.value.lon}&forecast_days=${forecastDays}&timezone=${timeZone}&${interval}=precipitation_probability,temperature_2m,weather_code,is_day`,
       )
 
       if (!response.ok) {
