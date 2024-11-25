@@ -1,4 +1,4 @@
-import{_ as t,c as s}from"./index-ZhTn9bPB.js";const i={};function a(o,e){return e[0]||(e[0]=s(`<body><h1>Testing display of HTML elements</h1><p> This page contains a bunch of HTML Elements and text. You can copy the source code and use it test out various CSS Properties. For testing purposes, you may use <strong>internal styles</strong>. Recall that these CSS rules are placed in between the <code>head</code> tags using the following format: </p><code><pre>&lt;style type=&quot;text/css&quot;&gt;
+import{_ as t,c as s}from"./index-DmiOGXt8.js";const i={};function a(o,e){return e[0]||(e[0]=s(`<body><h1>Testing display of HTML elements</h1><p> This page contains a bunch of HTML Elements and text. You can copy the source code and use it test out various CSS Properties. For testing purposes, you may use <strong>internal styles</strong>. Recall that these CSS rules are placed in between the <code>head</code> tags using the following format: </p><code><pre>&lt;style type=&quot;text/css&quot;&gt;
   selector {
     property: value
   }
