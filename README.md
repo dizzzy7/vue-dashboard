@@ -92,3 +92,11 @@ TypeScript cannot handle type information for `.vue` imports by default, so we r
 ## Customize configuration
 
 See [Vite Configuration Reference](https://vite.dev/config/).
+
+
+---
+
+## Build for gh-pages
+
+1. create a new commit with the updated dist files
+2. git subtree push --prefix dist origin gh-pages
