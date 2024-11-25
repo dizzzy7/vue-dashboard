@@ -68,7 +68,6 @@ const { width, height } = useWindowSize()
           :weather-data="currentWeatherData"
           :weather-is-pending="currentWeatherIsPending"
         />
-        {{ locationData }}
       </div>
       <div class="dashboard__body-item dashboard__body-item--span-one">
         <CurrentTimeWidget />
