@@ -13,8 +13,8 @@ import { useWindowSize } from '@vueuse/core'
 const { data: locationData } = useLocation()
 
 const location = computed(() => ({
-  lat: locationData.value?.lat,
-  lon: locationData.value?.lon,
+  lat: locationData.value?.latitude,
+  lon: locationData.value?.longitude,
 }))
 
 const enabled = computed(() => !!locationData.value)
@@ -68,6 +68,7 @@ const { width, height } = useWindowSize()
           :weather-data="currentWeatherData"
           :weather-is-pending="currentWeatherIsPending"
         />
+        {{ locationData }}
       </div>
       <div class="dashboard__body-item dashboard__body-item--span-one">
         <CurrentTimeWidget />

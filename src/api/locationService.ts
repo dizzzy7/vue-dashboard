@@ -3,12 +3,12 @@ import { useQuery } from '@tanstack/vue-query'
 export const useLocation = () =>
   useQuery<{
     city: string
-    lat: number
-    lon: number
+    latitude: number
+    longitude: number
   }>({
     queryKey: ['location', 'estimated'],
     queryFn: async () => {
-      const response = await fetch('http://ip-api.com/json/')
+      const response = await fetch('https://ipapi.co/json/')
 
       if (!response.ok) {
         throw new Error(response.statusText)
